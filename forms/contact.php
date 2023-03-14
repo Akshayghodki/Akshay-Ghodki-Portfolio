@@ -2,7 +2,7 @@
 ini_set("display_errors", 1);
 
 use PHPMailer\PHPMailer\PHPMailer;
-require_once "vendor/autoload.php";
+require_once "form/autoload.php";
 //PHPMailer Object 
 $mail = new PHPMailer; //From email address and name 
 $mail->From = $_POST['email']; 
