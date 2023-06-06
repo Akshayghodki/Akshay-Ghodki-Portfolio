@@ -595,24 +595,24 @@ amplitude.init('d532d9d04442ca490a197f4d850c6051', undefined, { defaultTracking:
           </div>
 
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="https://send.pageclip.co/BKyivGPyTbVlBpF4QKe5fyq5fv8sdtOw" method="post" role="form" class="pageclip-form">
+            <form name="submit-to-google-sheet" >
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="name">Your Name</label>
-                  <input type="text" name="name" class="form-control" id="name" required>
+                  <input type="text" name="Name" class="form-control" id="name" required>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="name">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email" required>
+                  <input type="email" class="form-control" name="Email" id="email" required>
                 </div>
               </div>
               <div class="form-group">
                 <label for="name">Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject" required>
+                <input type="text" class="form-control" name="Subject" id="subject" required>
               </div>
               <div class="form-group">
                 <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" required></textarea>
+                <textarea class="form-control" name="Message" rows="10" required></textarea>
               </div>
              <!-- <div class="my-3">
                 <div class="loading">Loading</div>
@@ -621,6 +621,7 @@ amplitude.init('d532d9d04442ca490a197f4d850c6051', undefined, { defaultTracking:
               </div>  -->
               <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
+             <span id="msg"></span>
           </div>
 
         </div>
@@ -662,6 +663,24 @@ amplitude.init('d532d9d04442ca490a197f4d850c6051', undefined, { defaultTracking:
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+   <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzbpx49mgS1OjqJhRBK4VGPl2pkkI00m7JiWDfIVV_rfBUFWGv66PgMtr2nQFibkA-a/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response =>{
+                msg.innerHTML = "Message Sent Successfully"
+               setTimeout(function(){
+                msg.innerHTML= ""
+               },5000)
+               form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
 
 
 </body>
