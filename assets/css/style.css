@@ -1101,3 +1101,8 @@ section {
     padding-right: 20px 15px;
   }
 }
+#msg{
+    color: #61b752;
+    margin-top: -10px;
+    display: block;
+}
